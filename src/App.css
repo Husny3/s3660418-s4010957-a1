@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+.header {
+  background-color: #282c34;
+}
+.main {
+  background-color: #8d507a;
+}
+.footer {
+  background-color: #265d6a;
+}
+.navbar {
+  background-color: #516795;
+}
