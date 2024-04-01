@@ -1,5 +1,5 @@
 function Footer()
- {  return <h1 className="footer">this will be footer area</h1>;
+ {  return <h3 className="footer">&copy; S3660418 / S4010957. All rights reserved  </h3>;
 }
 
 export default Footer;
