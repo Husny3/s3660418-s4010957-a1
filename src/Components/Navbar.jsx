@@ -1,5 +1,19 @@
+export default Navbar;
+
 function Navbar()
- {  return <h1 className="navbar">this will be navbar area</h1>;
+ {  return <nav className="navbar">
+ <a href="/" className="site-title"> SOIL </a>
+ <ul className="navbar-items">
+    <li className="active">
+        <a href ="/Specials"> Specials</a>
+        </li>
+        <li className="active">
+        <a href ="/Signin"> Sign in</a>
+        </li>
+        <li className="active">
+        <a href ="/Profile">Profile</a>
+    </li>
+ </ul>
+ </nav>
 }
 
-export default Navbar;
