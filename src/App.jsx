@@ -9,17 +9,18 @@ import Footer from './Components/Footer';
 import Main from './Components/Main';
 import Home from './pages/Home';
 import Form from "./pages/Form";
+import { getUser, removeUser } from './data/repository'
 
 
 function App() {
-  const [username, setUsername] = useState();
+  const [username, setUsername] = useState(getUser());
 
   const loginUser = (username) => {
     setUsername(username);
   }
 
   const logoutUser = () => {
-  ;
+    removeUser();
     setUsername(null);
   }
 

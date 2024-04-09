@@ -1,16 +1,20 @@
 import React, { useState } from "react";
+import { addUser } from "../data/repository";
+ 
 
 
 const Form = () => {
- 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+
     const [email, setEmail] = useState('');
-    const [fullName, setFullname] = useState('');
- 
-    function onChangeUsername(e) {
-        setUsername(e.target.value)
+    const [password, setPassword] = useState('');
+    const [fullname, setFullname] = useState('');
+    const dateCreated = addUser(email, password, fullname); 
+    
+
+    function onChangeEmail(e) {
+        setEmail(e.target.value)
     }
+
     function onChangePassword(e) {
         setPassword(e.target.value)
     }
@@ -18,54 +22,48 @@ const Form = () => {
     function onChangeFullname(e) {
         setFullname(e.target.value)
     }
-    function onChangeEmail(e) {
-        setEmail(e.target.value)
-    }
  
     function onSubmit(e) {
         e.preventDefault()
-        localStorage.setItem('username', username);
+
+        localStorage.setItem('username', email);
         localStorage.setItem('password', password);
-        localStorage.setItem('fullname', fullName);
-        localStorage.setItem('email', email);
-    }
- 
-    function getData() {
-        console.log(localStorage.getItem('username'));
-        console.log(localStorage.getItem('password'))
-        console.log(localStorage.getItem('fullname'));
-        console.log(localStorage.getItem('email'))
+        localStorage.setItem('fullname',fullname);
+
+        let addError = addUser(email,password,fullname,dateCreated)
+        if (addError !== undefined) {
+            alert(addError)
+
+        }
+        return;
     }
 
-
+    // function getData() {
+    //     console.log(localStorage.getItem('password'));
+    //     console.log(localStorage.getItem('email'));
+    //     console.log(localStorage.getItem('fullname'));
+    // }
     return (
         <>
             <div>
-                <h1>Sign in </h1>
+                <h1>signup now</h1>
  
                 <div>
                     <form onSubmit={onSubmit}>
                         <div>
-                            <label>Username</label>
-                            <input type="text" value={username} onChange={onChangeUsername} />
+                            <label>Email</label>
+                            <input type="text" value={email} onChange={onChangeEmail} />
                         </div>
                         <div>
                             <label>Password</label>
                             <input type="password" value={password} onChange={onChangePassword} />
                         </div>
                         <div>
-                            <label>Full name</label>
-                            <input type="text" value={fullName} onChange={onChangeFullname} />
-                        </div>
-                        <div>
-                            <label>Email</label>
-                            <input type="text" value={email} onChange={onChangeEmail} />
+                            <label>Full Name</label>
+                            <input type="fullname" value={fullname} onChange={onChangeFullname} />
                         </div>
                         <button type="submit">Submit</button>
-
-                        {/**Consol testing see if user data saved locally */}
                     </form>
-                        <button type="button" onClick={getData}>Get Data</button> 
                 </div>
             </div>
         </>
