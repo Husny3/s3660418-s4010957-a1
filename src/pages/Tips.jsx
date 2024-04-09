@@ -10,4 +10,4 @@ function Tips() {
   );
 }
 
-export default Specials;
+export default Tips;
