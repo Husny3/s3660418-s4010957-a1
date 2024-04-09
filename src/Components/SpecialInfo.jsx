@@ -10,15 +10,17 @@ function SpecialInfo() {
       <table>
         <thead>
           <tr>
-            <th>Item</th>
-            <th>Special</th>
+            <th>Name</th>
+            <th>Original Price</th>
+            <th>New Price</th>
           </tr>
         </thead>
         <tbody>
           {specials.map((special, index) => (
             <tr key={index}>
-              <td>{special.item}</td>
-              <td>{special.special}</td>
+              <td>{special.name}</td>
+              <td>${special.original_price.toFixed(2)}</td>
+              <td>${special.new_price.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>

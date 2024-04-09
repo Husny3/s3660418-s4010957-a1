@@ -1,12 +1,6 @@
-import React, { useEffect } from "react";
-import { initializeSpecials } from "../data/repository";
+import React from "react";
 
 function Home(props) {
-  // Call initializeSpecials function when the component mounts
-  useEffect(() => {
-    initializeSpecials();
-  }, []);
-
   return (
     <div className="text-center">
       <h1 className="display-4">Home</h1>
