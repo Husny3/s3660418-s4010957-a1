@@ -1,7 +1,14 @@
 import React from "react";
+import SpecialInfo from "../Components/SpecialInfo";
+import GrowingInformation from "../Components/GrowingInformation";
 
 function Specials() {
-    return <h1> this is the specials page with a list of specials  </h1>
+  return (
+    <div>
+      <h1>This is the specials page with a list of specials</h1>
+      <SpecialInfo />
+    </div>
+  );
 }
 
 export default Specials;
