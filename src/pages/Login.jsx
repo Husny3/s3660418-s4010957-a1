@@ -34,7 +34,7 @@ function Login(props) {
       props.loginUser(fields.username);
 
       // Navigate to the home page.
-      navigate("/home");
+      navigate("/");
       
       return;
     }

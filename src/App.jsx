@@ -9,6 +9,7 @@ import Footer from './Components/Footer';
 import Main from './Components/Main';
 import Home from './pages/Home';
 import Form from "./pages/Form";
+import Tips from "./pages/Tips";
 import { getUser, removeUser } from './data/repository'
 
 
@@ -30,16 +31,17 @@ return (
 <Navbar username={username} logoutUser={logoutUser} />
 
       <Routes>
-        <Route path="/Home" element={<Home username={username} />} />
+        <Route path="/" element={<Home username={username} />} />
         <Route path="/login" element={<Login loginUser={loginUser} />} />
         <Route path="/Profile" element={<Profile username={username}/>} />
         <Route path="/Specials" element={<Specials/>} />
         <Route path="/Form" element={<Form/>} />
+        <Route path="/tips" element={<Tips/>} />
         
 
       </Routes>
 
-    <Main />
+    
     <Footer />
     </Router>
 </div>
