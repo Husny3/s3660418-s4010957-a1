@@ -1,5 +1,5 @@
 import React from "react";
-// import "./Main.css"; // Import CSS file for styling (if needed)
+import "../index.css"; // Import CSS file for styling (if needed)
 
 // Introduction component
 function Introduction() {
