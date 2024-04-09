@@ -1,57 +1,47 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 function Navbar(props) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State variable to track login status
-
-  // Function to handle logout
-  const logout = () => {
-    localStorage.removeItem("signUp");
-    setIsLoggedIn(false); // Update login status
-    window.location.reload();
-  };
-
-  // Effect to check login status when component mounts
-  useEffect(() => {
-    // Check if user is already logged in
-    const loggedInUser = localStorage.getItem("signUp");
-    if (loggedInUser) {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  const isLoggedIn = props.username !== null;
 
   return (
     <nav className="navbar">
-      <Link to="/" className="site-title">
-        SOIL
-      </Link>
-      <ul className="navbar-items">
-        <li className="active">
-          <Link to="/Specials">Specials</Link>
+      <Link className="navbar-brand" to="/">SOIL</Link>
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <Link className="nav-link" to="/Specials">Specials</Link>
         </li>
-        {!isLoggedIn && ( // Render Sign in and Sign up buttons when not logged in
+        {!isLoggedIn && (
           <>
-            <li className="active">
-              <Link to="/Login">Sign in</Link>
-            </li>
-            <li className="active">
-              <Link to="/Form">Sign up</Link>
+            <li className="nav-item">
+              <Link className="nav-link" to="/Form">Sign up</Link>
             </li>
           </>
         )}
-        {isLoggedIn && ( // Render Logout button when logged in
-          <li>
-          <Link className="nav-link" to="/Profile"> Profile </Link>
+        {isLoggedIn && (
+          <li className="nav-item">
+            <Link className="nav-link" to="/profile">My Profile</Link>
           </li>
         )}
-        {isLoggedIn && ( // Render Profile link when logged in
-          <li>
-          <Link className="nav-link" to="/login" onClick={logout}> Logout </Link>
+      </ul>
+      <ul className="navbar-nav">
+        {isLoggedIn && (
+          <>
+            <li className="nav-item">
+              <span className="nav-link text-light">Welcome, {props.username}</span>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/login" onClick={props.logoutUser}>Logout</Link>
+            </li>
+          </>
+        )}
+        {!isLoggedIn && (
+          <li className="nav-item">
+            <Link className="nav-link" to="/login">Login</Link>
           </li>
         )}
       </ul>
     </nav>
   );
-}
-
+}  
 export default Navbar;

@@ -1,73 +1,85 @@
-import React, { useEffect, useRef, useState } from "react";
-import Home from "./Home";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { verifyUser } from "../data/repository";
 
-function SignInSignupWithLocalStorage(){
-   const name=useRef()
-   const email=useRef()
-   const password=useRef()
-   const [showHome,setShowHome]=useState(false)
-   const [show,setShow]=useState(false)
-    const localSignUp=localStorage.getItem("signUp")
-    const localEmail=localStorage.getItem("email")
-    const localPassword=localStorage.getItem("password")
-    const localName=localStorage.getItem("name")
-   useEffect(()=>{
-    if(localSignUp){
-        setShowHome(true)
-    }
-    if(localEmail){
-        setShow(true)
-    }
-   })
-   const handleClick=()=>{
-       if(name.current.value&&email.current.value&&password.current.value)
-      {
-        localStorage.setItem("name",name.current.value)
-        localStorage.setItem("email",email.current.value)
-        localStorage.setItem("password",password.current.value)
-        localStorage.setItem("signUp",email.current.value)
-        alert("Account created successfully!!")
-        window.location.reload()
-      }
-   }
 
-   const handleSignIn=()=>{
-    if(email.current.value==localEmail&&password.current.value==localPassword){
-        localStorage.setItem("signUp",email.current.value)
-        window.location.reload()
-    }else{
-        alert("Please Enter valid Credential")
+
+function Login(props) {
+  const [fields, setFields] = useState({ username: "", password: ""});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+
+  // Generic change handler.
+  const handleInputChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    // Copy fields.
+    const temp = { username: fields.username, password: fields.password};
+    // OR use spread operator.
+    // const temp = { ...fields };
+
+    // Update field and state.
+    temp[name] = value;
+    setFields(temp);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const verified = verifyUser(fields.username, fields.password);
+
+    // If verified login the user.
+    if(verified === true) {
+      props.loginUser(fields.username);
+
+      // Navigate to the home page.
+      navigate("/home");
+      
+      return;
     }
-   }
-    return(
-        <div>
-            {showHome?<Home/>:
-            (show?
-                <div className="container">
-                        <h1>Hello {localName}</h1>
-                        <div className="input_space">
-                            <input placeholder="Email" type='text' ref={email} />
-                        </div>
-                        <div className="input_space">
-                            <input placeholder="Password" type='password' ref={password} />
-                        </div>
-                        <button onClick={handleSignIn}>Sign In</button>
-                </div>
-                :
-                <div className="container">
-                        <div className="input_space">
-                            <input placeholder="Name" type='text' ref={name} />
-                        </div>
-                        <div className="input_space">
-                            <input placeholder="Email" type='text' ref={email} />
-                        </div>
-                        <div className="input_space">
-                            <input placeholder="Password" type='password' ref={password} />
-                        </div>
-                        <button onClick={handleClick}>Sign Up</button>
-                </div>)
+
+
+
+    // Reset password field to blank.
+    const temp = { ...fields };
+    temp.password = "";
+    setFields(temp);
+
+    // Set error message.
+    setErrorMessage("Username and / or password invalid, please try again.");
+  }
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <hr />
+      <div className="row">
+        <div className="col-md-6">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="username" className="control-label">Username</label>
+              <input name="username" id="username" className="form-control"
+                value={fields.username} onChange={handleInputChange} />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password" className="control-label">Password</label>
+              <input type="password" name="password" id="password" className="form-control"
+                value={fields.password} onChange={handleInputChange} />
+            </div>
+            <div className="form-group">
+              <input type="submit" className="btn btn-primary" value="Login" />
+            </div>
+            {errorMessage !== null &&
+              <div className="form-group">
+                <span className="text-danger">{errorMessage}</span>
+              </div>
             }
+          </form>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
-export default SignInSignupWithLocalStorage;
+
+export default Login;
