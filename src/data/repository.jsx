@@ -1,6 +1,6 @@
 
-const USERS_KEY = "usersDB";
-const USER_KEY = "loggedinuser";
+export const USERS_KEY = "usersDB";
+export const USER_KEY = "loggedinuser";
 
 
 // Initialise local storage "users" with data, if the data is already set this function returns immediately.
@@ -42,10 +42,10 @@ function verifyUser(email, password) {
   return false;
 }
 
-function setUser(user,email) {
-  localStorage.setItem(USER_KEY, email);
-  localStorage.setItem(USER_KEY, user.dateCreated);
-  localStorage.setItem(USER_KEY, user.fullname);
+function setUser(user,email,) {
+  localStorage.setItem(USER_KEY + '_email', email);
+  localStorage.setItem(USER_KEY + '_dateCreated', user.dateCreated);
+  localStorage.setItem(USER_KEY + '_fullname', user.fullname);
   
 
 
@@ -60,7 +60,7 @@ function removeUser() {
   localStorage.removeItem(USER_KEY);
 }
 
-function addUser(email, password, name,) {
+function addUser(email, password, fullname) {
   // Retrieve existing users from local storage or initialize an empty object
   const users = JSON.parse(localStorage.getItem(USERS_KEY)) || {};
 
@@ -68,7 +68,7 @@ function addUser(email, password, name,) {
   localStorage.setItem('dateCreated', dateCreated);
 
   // Add the new user to the users object
-  users[email] = { password: password, name: name, dateCreated: dateCreated };
+  users[email] = { password: password, fullname: fullname, dateCreated: dateCreated };
 
   // Save the updated users object back to local storage
   localStorage.setItem(USERS_KEY, JSON.stringify(users));

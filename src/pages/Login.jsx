@@ -34,7 +34,8 @@ function Login(props) {
       props.loginUser(fields.username);
 
       // Navigate to the home page.
-      navigate("/");
+      navigate("/Profile");
+      alert("login succesful")
       
       return;
     }
@@ -58,7 +59,7 @@ function Login(props) {
         <div className="col-md-6">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="username" className="control-label">Username</label>
+              <label htmlFor="username" className="control-label">Email</label>
               <input name="username" id="username" className="form-control"
                 value={fields.username} onChange={handleInputChange} />
             </div>
