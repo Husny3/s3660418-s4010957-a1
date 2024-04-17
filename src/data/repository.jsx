@@ -172,6 +172,39 @@ const vegData = [
   }
 ];
 
+const products = [
+  {
+    id: 1,
+    name: "carrot",
+    price: 13.20
+  },
+  {
+    id: 2,
+    name: "broccoli",
+    price: 8.50
+  },
+  {
+    id: 3,
+    name: "tomato",
+    price: 9.99
+  },
+  {
+    id: 4,
+    name: "spinach",
+    price: 7.25
+  },
+  {
+    id: 5,
+    name: "apple",
+    price: 6.00
+  },
+  {
+    id: 6,
+    name: "banana",
+    price: 4.99
+  }
+];
+
 
 // Function to initialize specials data in localStorage
 function initializeSpecials() {
@@ -193,6 +226,15 @@ function initializeVegetables() {
     localStorage.setItem("vegetables", JSON.stringify(vegData));
   }
 }
+function initializeProducts() {
+  const currentProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+  // Check if there's existing data in localStorage
+  if (currentProducts.length === 0) {
+    // If no existing data, set the hardcoded products data
+    localStorage.setItem("products", JSON.stringify(products));
+  }
+}
 
 export {
   addUser,
@@ -201,5 +243,6 @@ export {
   getUser,
   removeUser,
   initializeVegetables,
-  initializeSpecials
+  initializeSpecials,
+  initializeProducts
 }

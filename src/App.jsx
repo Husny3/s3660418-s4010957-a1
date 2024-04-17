@@ -4,6 +4,8 @@ import './App.css';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Specials from './pages/Specials'; 
+import Shopping from './pages/Shopping';
+import Checkout from './pages/Checkout';
 import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Main from './Components/Main';
@@ -34,6 +36,8 @@ return (
         <Route path="/" element={<Home username={username} />} />
         <Route path="/login" element={<Login loginUser={loginUser} />} />
         <Route path="/Profile" element={<Profile username={username}/>} />
+        <Route path="/Shopping" element={<Shopping/>} />
+        <Route path="/Shopping/Checkout" element={<Checkout/>} />
         <Route path="/Specials" element={<Specials/>} />
         <Route path="/Form" element={<Form/>} />
         <Route path="/tips" element={<Tips/>} />

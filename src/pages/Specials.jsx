@@ -1,6 +1,5 @@
 import React from "react";
 import SpecialInfo from "../Components/SpecialInfo";
-import GrowingInformation from "../Components/GrowingInformation";
 
 function Specials() {
   return (

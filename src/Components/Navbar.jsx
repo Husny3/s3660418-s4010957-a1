@@ -12,6 +12,9 @@ function Navbar(props) {
           <Link className="nav-link" to="/Specials">Specials</Link>
         </li>
         <li className="nav-item">
+          <Link className="nav-link" to="/Shopping">Shopping</Link>
+        </li>
+        <li className="nav-item">
               <Link className="nav-link" to="/Tips">Useful Tips</Link>
             </li>
         {!isLoggedIn && (
